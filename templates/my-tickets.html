@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>My Tickets - Tiya Golf Club</title>
+
+<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/css/bootstrap-icons.css" rel="stylesheet">
+<link href="/static/css/templatemo-tiya-golf-club.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<main>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+<div class="container">
+
+<a class="navbar-brand d-flex align-items-center" href="/">
+<img src="/static/images/logo.png" class="navbar-brand-image img-fluid">
+<span class="navbar-brand-text">
+Tiya
+<small>Golf Club</small>
+</span>
+</a>
+
+<div class="collapse navbar-collapse">
+
+<ul class="navbar-nav ms-lg-auto">
+
+<li class="nav-item">
+<a class="nav-link" href="/dashboard">Dashboard</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/events">Events</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link text-danger" href="/logout">Logout</a>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+</nav>
+
+
+<!-- PAGE TITLE -->
+<section class="section-padding text-center">
+
+<div class="container">
+
+<h2 class="mb-4">My Event Tickets 🎟️</h2>
+
+<p class="lead">
+Here are all the events you have booked.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- TICKETS TABLE -->
+<section class="section-padding pt-0">
+
+<div class="container">
+
+<div class="table-responsive">
+
+<table class="table table-striped shadow-lg">
+
+
+<thead class="table-dark">
+<tr>
+<th>Ticket ID</th>
+<th>Event</th>
+<th>Date</th>
+<th>Location</th>
+<th>Ticket</th>
+<th>Download</th>
+</tr>
+</thead>
+
+
+<tbody>
+
+{% for ticket in tickets %}
+
+<tr>
+
+<td>{{ ticket.id }}</td>
+
+<td>{{ ticket.event.title }}</td>
+
+<td>{{ ticket.event.date }}</td>
+
+<td>{{ ticket.event.location }}</td>
+
+<td>
+
+{% if ticket.ticket_image %}
+
+<button class="btn btn-primary btn-sm"
+data-bs-toggle="modal"
+data-bs-target="#ticketModal{{ ticket.id }}">
+View Ticket
+</button>
+
+{% else %}
+<span class="text-muted">Generating...</span>
+{% endif %}
+
+</td>
+
+<td>
+
+{% if ticket.ticket_image %}
+
+<a href="/{{ ticket.ticket_image }}" download class="btn btn-success btn-sm">
+Download
+</a>
+
+{% else %}
+
+<span class="text-muted">Not Ready</span>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% if ticket.ticket_image %}
+
+<div class="modal fade" id="ticketModal{{ ticket.id }}" tabindex="-1">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+
+<div class="modal-header">
+<h5 class="modal-title">Ticket Preview</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+
+<div class="modal-body text-center">
+
+<img src="/{{ ticket.ticket_image }}"
+class="img-fluid rounded shadow">
+
+</div>
+
+</div>
+</div>
+</div>
+
+{% endif %}
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer class="site-footer">
+
+<div class="container text-center">
+
+<p class="copyright-text">
+© 2048 Tiya Golf Club
+</p>
+
+</div>
+
+</footer>
+
+
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
