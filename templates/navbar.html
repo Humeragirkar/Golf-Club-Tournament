@@ -1,0 +1,104 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+
+        <!-- LOGO -->
+        <a class="navbar-brand d-flex align-items-center" href="/">
+            <img src="/static/images/logo.png" class="navbar-brand-image img-fluid">
+            <span class="navbar-brand-text">
+                Tiya <small>Golf Club</small>
+            </span>
+        </a>
+
+        <!-- MOBILE TOGGLE -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- NAV LINKS -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-lg-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/events">Events</a>
+                </li>
+
+                <!-- SHOW ONLY IF LOGGED IN -->
+                {% if request.cookies.get("user_id") %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/my-tickets">My Tickets</a>
+                </li>
+                {% endif %}
+
+            </ul>
+
+            <!-- RIGHT SIDE BUTTONS -->
+            <div class="ms-lg-3">
+
+                {% if request.cookies.get("user_id") %}
+
+                    <!-- DASHBOARD -->
+                    <a class="btn custom-btn" href="/dashboard">
+                        Dashboard
+                    </a>
+
+                    <!-- LOGOUT -->
+                    <a class="btn ms-2" style="background-color:#dc3545; color:white;" href="/logout">
+                        Logout
+                    </a>
+
+                {% else %}
+
+                    <!-- LOGIN BUTTON -->
+                    <a class="btn custom-btn custom-border-btn"
+                       data-bs-toggle="offcanvas"
+                       href="#offcanvasExample">
+                        Login
+                    </a>
+
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ================= LOGIN DRAWER ================= -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample">
+    
+    <div class="offcanvas-header">
+        <h5>Member Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+
+    <div class="offcanvas-body">
+
+        <form action="/login" method="post">
+
+            {% if login_error %}
+            <div class="alert alert-danger">{{ login_error }}</div>
+            {% endif %}
+
+            <input type="text" 
+                   name="membership_id" 
+                   class="form-control mb-2" 
+                   placeholder="Membership ID" 
+                   required>
+
+            <input type="password" 
+                   name="password" 
+                   class="form-control mb-3" 
+                   placeholder="Password" 
+                   required>
+
+            <button class="btn custom-btn w-100">
+                Login
+            </button>
+
+        </form>
+
+    </div>
+</div>

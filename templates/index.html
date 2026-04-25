@@ -1,699 +1,137 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "base.html" %}
 
-        <meta name="description" content="">
-        <meta name="author" content="">
+{% block title %}Home - Tiya Golf Club{% endblock %}
 
-        <title>Tiya Golf Club - Free HTML CSS Template</title>
+{% block content %}
 
-        <!-- CSS FILES -->                
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+<section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
 
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <div class="section-overlay"></div>
 
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-
-        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-
-        <link href="/static/css/bootstrap-icons.css" rel="stylesheet">
-
-        <link href="/static/css/templatemo-tiya-golf-club.css" rel="stylesheet">
-        
-<!--
-
-TemplateMo 587 Tiya Golf Club
-
-https://templatemo.com/tm-587-tiya-golf-club
-
--->
-    </head>
-    
-    <body>
-
-        <main>
-
-            <nav class="navbar navbar-expand-lg">                
-                <div class="container">
-                    <a class="navbar-brand d-flex align-items-center" href="/">
-                        <img src="/static/images/logo.png" class="navbar-brand-image img-fluid" alt="Tiya Golf Club">
-                        <span class="navbar-brand-text">
-                            Tiya
-                            <small>Golf Club</small>
-                        </span>
-                    </a>
-
-                    <div class="d-lg-none ms-auto me-3">
-                        <a class="btn custom-btn custom-border-btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Member Login</a>
-                    </div>
-    
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-    
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-lg-auto">
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_1">Home</a>
-                            </li>
-    
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_2">About</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_3">Membership</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_4">Events</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_5">Contact Us</a>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-
-                                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="/events">Event Listing</a></li>
-
-                                    <li><a class="dropdown-item" href="/events">Event Detail</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                        <div class="d-none d-lg-block ms-lg-3">
-                            {% if request.cookies.get("user_id") %}
-                            <a class="btn custom-btn" href="/dashboard">
-                                Dashboard
-                            </a>
-                            {% else %}
-                        <a class="btn custom-btn custom-border-btn"
-                            data-bs-toggle="offcanvas"
-                            href="#offcanvasExample">
-                            Member Login
-                        </a>
-                        {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </nav>
-
-            <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">                
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Member Login</h5>
-                    
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                
-                <div class="offcanvas-body d-flex flex-column">
-                    <form class="custom-form member-login-form" action="/login" method="post" role="form">
-
-                        <div class="member-login-form-body">
-
-                            <!-- LOGIN ERROR MESSAGE -->
-                             {% if login_error %}
-                            <div class="alert alert-danger">
-                                {{ login_error }}
-                            </div>
-                             {% endif %}
-
-                            <!-- LOGIN SUCCESS MESSAGE -->
-                            {% if login_success %}
-                            <div class="alert alert-success">
-                                {{ login_success }}
-                            </div>
-                            {% endif %}
-
-                            <div class="mb-4">
-                                <label class="form-label mb-2" for="member-login-number">Membership No.</label>
-
-                                <input type="text" name="membership_id" id="member-login-number" class="form-control" placeholder="11002560" required>                            </div>
-
-                            <div class="mb-4">
-                                <label class="form-label mb-2" for="member-login-password">Password</label>
-
-                                <input type="password" name="password" id="member-login-password"  class="form-control" placeholder="Password" required="">
-                            </div>
-
-                            <div class="form-check mb-4">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                              
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Remember me
-                                </label>
-                            </div>
-
-                            <div class="col-lg-5 col-md-7 col-8 mx-auto">
-                                <button type="submit" class="form-control">Login</button>
-                            </div>
-
-                            <div class="text-center my-4">
-                                <a href="#">Forgotten password?</a>
-                            </div>
-                        </div>
-                    </form>
-
-                    <div class="mt-auto mb-5">
-                        <p>
-                            <strong class="text-white me-3">Any Questions?</strong>
-
-                            <a href="tel: 010-020-0340" class="contact-link">
-                            	010-020-0340
-                            </a>
-                        </p>
-                    </div>
-                </div>
-
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3D405B" fill-opacity="1" d="M0,224L34.3,192C68.6,160,137,96,206,90.7C274.3,85,343,139,411,144C480,149,549,107,617,122.7C685.7,139,754,213,823,240C891.4,267,960,245,1029,224C1097.1,203,1166,181,1234,160C1302.9,139,1371,117,1406,106.7L1440,96L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path></svg>
-            </div>
-            
-
-            <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
-
-                <div class="section-overlay"></div>
-
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3D405B" fill-opacity="1" d="M0,224L34.3,192C68.6,160,137,96,206,90.7C274.3,85,343,139,411,144C480,149,549,107,617,122.7C685.7,139,754,213,823,240C891.4,267,960,245,1029,224C1097.1,203,1166,181,1234,160C1302.9,139,1371,117,1406,106.7L1440,96L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z"></path></svg>
-
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                            <h2 class="text-white">{{ data.hero_title }}</h2>
-
-                            <h1 class="cd-headline rotate-1 text-white mb-4 pb-2">
-                                <span>Tiya is</span>
-
-
-                                <span class="cd-words-wrapper">
-                                {% for word in data.hero_words %}
-
-                                    <b {% if loop.first %} class="is-visible"{% endif %}>{{ word }}</b>
-                                    {% endfor %}
-
-                                </span>
-                            </h1>
-
-                            <div class="custom-btn-group">
-                                <a href="#section_2" class="btn custom-btn smoothscroll me-3">Our Story</a>
-
-                                <a href="#section_3" class="link smoothscroll">Become a member</a>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 col-12">
-                            <div class="ratio ratio-16x9">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/MGNgbNGOzh8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,224L34.3,192C68.6,160,137,96,206,90.7C274.3,85,343,139,411,144C480,149,549,107,617,122.7C685.7,139,754,213,823,240C891.4,267,960,245,1029,224C1097.1,203,1166,181,1234,160C1302.9,139,1371,117,1406,106.7L1440,96L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path></svg>
-            </section>
-
-
-            <section class="about-section section-padding" id="section_2">
-                 <div class="container">
-
-                 <!-- TITLE -->
+    <div class="container">
         <div class="row">
-            <div class="col-lg-12 col-12 text-center">
-                <h2 class="mb-lg-5 mb-4">{{ data.about.title }}</h2>
+
+            <div class="col-lg-6 col-12 mb-5 mb-lg-0">
+                <h2 class="text-white">{{ data.hero_title }}</h2>
+
+                <h1 class="cd-headline rotate-1 text-white mb-4 pb-2">
+                    <span>Tiya is</span>
+
+                    <span class="cd-words-wrapper">
+                        {% for word in data.hero_words %}
+                        <b {% if loop.first %}class="is-visible"{% endif %}>{{ word }}</b>
+                        {% endfor %}
+                    </span>
+                </h1>
+
+                <div class="custom-btn-group">
+                    <a href="#section_2" class="btn custom-btn smoothscroll me-3">Our Story</a>
+                    <a href="#section_3" class="link smoothscroll">Become a member</a>
+                </div>
             </div>
+
+            <div class="col-lg-6 col-12">
+                <div class="ratio ratio-16x9">
+                    <iframe src="https://www.youtube.com/embed/MGNgbNGOzh8" allowfullscreen></iframe>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ABOUT -->
+<section class="about-section section-padding" id="section_2">
+    <div class="container">
+
+        <div class="text-center mb-4">
+            <h2>{{ data.about.title }}</h2>
         </div>
 
-        <!-- ABOUT TEXT -->
         <div class="row mb-5">
-
-                <div class="col-lg-6 col-12">
-
-                <h3 class="mb-3">{{ data.about.history_title }}</h3>
-
+            <div class="col-lg-6">
+                <h3>{{ data.about.history_title }}</h3>
                 <p><strong>{{ data.about.history_text }}</strong></p>
-
-                <p>
-                    Tiya Golf Club is a premium golf community offering
-                    world-class facilities and tournaments for members.
-                </p>
             </div>
-
         </div>
 
-        <!-- TEAM MEMBERS -->
         <div class="row">
-
             {% for member in data.members %}
-
-            <div class="col-lg-3 col-md-6 col-12 mb-4">
+            <div class="col-lg-3 col-md-6 mb-4">
                 <div class="member-block">
-
-                    <div class="member-block-image-wrap">
-                        <img src="/static/images/members/{{ member.image }}"
-                             class="member-block-image img-fluid"
-                             alt="{{ member.name }}">
-
-                        <ul class="social-icon">
-                            <li class="social-icon-item">
-                                <a href="{{ member.twitter }}" class="social-icon-link bi-twitter"></a>
-                            </li>
-
-                            <li class="social-icon-item">
-                                <a href="{{ member.linkedin }}" class="social-icon-link bi-linkedin"></a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="member-block-info d-flex align-items-center">
-                        <h4>{{ member.name }}</h4>
-                        <p class="ms-auto">{{ member.role }}</p>
-                    </div>
-
+                    <img src="/static/images/members/{{ member.image }}" class="img-fluid">
+                    <h4>{{ member.name }}</h4>
+                    <p>{{ member.role }}</p>
                 </div>
             </div>
-
             {% endfor %}
-
         </div>
 
     </div>
 </section>
 
 
-            <section class="section-bg-image">
-                <svg viewBox="0 0 1265 144" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="rgba(255, 255, 255, 1)" d="M 0 40 C 164 40 164 20 328 20 L 328 20 L 328 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(255, 255, 255, 1)" d="M 327 20 C 445.5 20 445.5 89 564 89 L 564 89 L 564 0 L 327 0 Z" stroke-width="0"></path> <path fill="rgba(255, 255, 255, 1)" d="M 563 89 C 724.5 89 724.5 48 886 48 L 886 48 L 886 0 L 563 0 Z" stroke-width="0"></path><path fill="rgba(255, 255, 255, 1)" d="M 885 48 C 1006.5 48 1006.5 67 1128 67 L 1128 67 L 1128 0 L 885 0 Z" stroke-width="0"></path><path fill="rgba(255, 255, 255, 1)" d="M 1127 67 C 1196 67 1196 0 1265 0 L 1265 0 L 1265 0 L 1127 0 Z" stroke-width="0"></path></svg>
-
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-lg-6 col-12">
-                            <div class="section-bg-image-block">
-                                <h2 class="mb-lg-3">{{ data.newsletter.title }}</h2>
-
-                                <p>{{ data.newsletter.description }}</p>
-
-                                <form action="/subscribe" method="post" class="custom-form mt-lg-4 mt-2" role="form">
-                                    <div class="input-group input-group-lg">
-                                        <span class="input-group-text bi-envelope" id="basic-addon1"></span>
-
-                                        <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email address" required="">
-
-                                        <button type="submit" class="form-control">Subscribe</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <svg viewBox="0 0 1265 144" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="rgba(255, 255, 255, 1)" d="M 0 40 C 164 40 164 20 328 20 L 328 20 L 328 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(255, 255, 255, 1)" d="M 327 20 C 445.5 20 445.5 89 564 89 L 564 89 L 564 0 L 327 0 Z" stroke-width="0"></path> <path fill="rgba(255, 255, 255, 1)" d="M 563 89 C 724.5 89 724.5 48 886 48 L 886 48 L 886 0 L 563 0 Z" stroke-width="0"></path><path fill="rgba(255, 255, 255, 1)" d="M 885 48 C 1006.5 48 1006.5 67 1128 67 L 1128 67 L 1128 0 L 885 0 Z" stroke-width="0"></path><path fill="rgba(255, 255, 255, 1)" d="M 1127 67 C 1196 67 1196 0 1265 0 L 1265 0 L 1265 0 L 1127 0 Z" stroke-width="0"></path></svg>
-            </section>
-
-
-            <section class="membership-section section-padding" id="section_3">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-lg-12 col-12 text-center mx-auto mb-lg-5 mb-4">
-                            <h2><span>Membership</span> at Tiya</h2>
-                        </div>
-
-                        <div class="col-lg-6 col-12 mb-3 mb-lg-0">
-                            <h4 class="mb-4 pb-lg-2">Membership Fees</h4>
-
-                            <div class="table-responsive">
-                                <table class="table text-center">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 34%;">Yearly Access</th>
-                                            
-                                            {% for plan in data.membership.plans %}
-                                            <th>{{ plan.name }} ${{ plan.price }}</th>
-                                            {% endfor %}
-
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row" class="text-start">Golf Insurance</th>
-                                            
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-                                            
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-                                            
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th scope="row" class="text-start">Club Facilities</th>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th scope="row" class="text-start">Country Club</th>
-
-                                            <td>
-                                                <i class="bi-x-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th scope="row" class="text-start">Weekend Seasonal</th>
-
-                                            <td>
-                                                <i class="bi-x-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th scope="row" class="text-start">Premium Courses</th>
-
-                                            <td>
-                                                <i class="bi-x-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-x-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <th scope="row" class="text-start">Pro's Networking</th>
-
-                                            <td>
-                                                <i class="bi-x-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-x-circle-fill"></i>
-                                            </td>
-
-                                            <td>
-                                                <i class="bi-check-circle-fill"></i>
-                                            </td>
-                                        </tr>
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-5 col-12 mx-auto">
-                        <h4 class="mb-4 pb-lg-2">Please join us!</h4>
-                            <form action="/membership" method="post" class="custom-form membership-form shadow-lg" role="form">
-                                <h4 class="text-white mb-4">Become a member</h4>
-
-                                <!-- SUCCESS MESSAGE -->
-                                {% if membership_success %}
-                                <div class="alert alert-success">
-                                    {{ membership_success }}
-                                </div>
-                                {% endif %}
-
-                                <!-- ERROR MESSAGE -->
-                                {% if membership_error %}
-                                 <div class="alert alert-danger">
-                                {{ membership_error }}
-                                </div>
-                                {% endif %}
-
-                                    <div class="form-floating">
-                                        <input type="text" name="full_name" id="full-name" class="form-control" placeholder="Full Name" required="">
-                                        
-                                        <label for="floatingInput">Full Name</label>
-                                    </div>
-
-                                    <div class="form-floating">
-                                        <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email address" required="">
-                                        
-                                        <label for="floatingInput">Email address</label>
-                                    </div>
-                                    <div class="form-floating">
-                                        <input type="password" name="password" id="password"  class="form-control" placeholder="Email address" required="">
-                                        
-                                        <label for="floatingInput">Password</label>
-                                    </div>
-                                    <div class="form-floating">
-                                        <textarea class="form-control" id="message" name="message" placeholder="Describe message here"></textarea>
-                                        
-                                        <label for="floatingTextarea"> Comments</label>
-                                    </div>
-
-                                    <button type="submit" class="form-control">Submit</button>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-
-            <section class="events-section section-bg section-padding" id="section_4">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-lg-12 col-12">
-                            <h2 class="mb-lg-3">Upcoming Events</h2>
-                        </div>
-
-                        {% for event in events %}
-
-                        <div class="row custom-block mb-3">
-                            <div class="col-lg-2 col-md-4 col-12 order-2 order-md-0 order-lg-0">
-                                <div class="custom-block-date-wrap d-flex d-lg-block d-md-block align-items-center mt-3 mt-lg-0 mt-md-0">
-                                    <h6 class="custom-block-date mb-lg-1 mb-0 me-3 me-lg-0 me-md-0">{{ event.day }}</h6>
-                                    
-                                    <strong class="text-white">{{ event.month }}</strong>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-8 col-12 order-1 order-lg-0">
-                                <div class="custom-block-image-wrap">
-                                    <a href="/events/{{ event.id }}">
-                                        <img src="/static/images/{{ event.image }}" class="custom-block-image img-fluid" alt="">
-
-                                        <i class="custom-block-icon bi-link"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-12 order-3 order-lg-0">
-                                <div class="custom-block-info mt-2 mt-lg-0">
-                                    <a href="/events/{{ event.id }}" class="events-title mb-3">{{ event.title }}</a>
-
-                                    <p class="mb-0">{{ event.description }}</p>
-
-                                    <div class="d-flex flex-wrap border-top mt-4 pt-3">
-
-                                        <div class="mb-4 mb-lg-0">
-                                            <div class="d-flex flex-wrap align-items-center mb-1">
-                                                <span class="custom-block-span">Location:</span>
-
-                                                <p class="mb-0">{{ event.location }}</p>
-                                            </div>
-
-                                            <div class="d-flex flex-wrap align-items-center">
-                                                <span class="custom-block-span">Ticket:</span>
-
-                                                <p class="mb-0">{{ event.price }}</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex align-items-center ms-lg-auto">
-                                            <a href="/events/{{ event.id }}" class="btn custom-btn">Buy Ticket</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                        {% endfor %}
-
-                    </div>
-                </div>
-            </section>
-
-
-            <section class="contact-section section-padding" id="section_5">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-lg-5 col-12">
-                            <form action="/contact" method="post" class="custom-form contact-form" role="form">
-                                <h2 class="mb-4 pb-2">Contact Tiya</h2>
-
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-12">
-                                        <div class="form-floating">
-                                            <input type="text" name="full_name" id="full-name" class="form-control" placeholder="Full Name" required="">
-                                            
-                                            <label for="floatingInput">Full Name</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6 col-12"> 
-                                        <div class="form-floating">
-                                            <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email address" required="">
-                                            
-                                            <label for="floatingInput">Email address</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12 col-12">
-                                        <div class="form-floating">
-                                            <textarea class="form-control" id="message" name="message" placeholder="Describe message here"></textarea>
-                                            
-                                            <label for="floatingTextarea">Message</label>
-                                        </div>
-
-                                        <button type="submit" class="form-control">Submit Form</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div class="col-lg-6 col-12">
-                            <div class="contact-info mt-5">
-                                <div class="contact-info-item">
-                                    <div class="contact-info-body">
-                                        <strong>{{ data.contact.city }}</strong>
-
-                                        <p class="mt-2 mb-1">
-                                            <a href="tel: {{ data.contact.phone }}" class="contact-link">
-                                                {{ data.contact.phone }}
-                                            </a>
-                                        </p>
-
-                                        <p class="mb-0">
-                                            <a href="mailto:{{ data.contact.email }}" class="contact-link">
-                                                {{ data.contact.email }}
-                                            </a>
-                                        </p>
-                                    </div>
-
-                                    <div class="contact-info-footer">
-                                        <a href="#">Directions</a>
-                                    </div>
-                                </div>
-
-                                <img src="/static/images/WorldMap.svg" class="img-fluid" alt="">
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="site-footer">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-6 col-12 me-auto mb-5 mb-lg-0">
-                        <a class="navbar-brand d-flex align-items-center" href="/">
-                            <img src="/static/images/logo.png" class="navbar-brand-image img-fluid" alt="">
-                            <span class="navbar-brand-text">
-                                Tiya
-                                <small>Golf Club</small>
-                            </span>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-3 col-12">
-                        <h5 class="site-footer-title mb-4">Join Us</h5>
-
-                        <p class="d-flex border-bottom pb-3 mb-3 me-lg-3">
-                            <span>Mon-Fri</span>
-                            6:00 AM - 6:00 PM
-                        </p>
-
-                        <p class="d-flex me-lg-3">
-                            <span>Sat-Sun</span>
-                            6:30 AM - 8:30 PM
-                        </p>
-                        <br>
-                        <p class="copyright-text">Copyright © 2048 Tiya Golf Club</p>
-                    </div>
-
-                        <div class="col-lg-2 col-12 ms-auto">
-                            <ul class="social-icon mt-lg-5 mt-3 mb-4">
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-instagram"></a>
-                                </li>
-
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-twitter"></a>
-                                </li>
-
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-whatsapp"></a>
-                                </li>
-                            </ul>
-                            <p class="copyright-text">Design: <a rel="nofollow" href="https://templatemo.com" target="_blank">TemplateMo</a>. Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a></p>
-                            
-                        </div>
-
-                </div>
-            </div>
-
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#81B29A" fill-opacity="1" d="M0,224L34.3,192C68.6,160,137,96,206,90.7C274.3,85,343,139,411,144C480,149,549,107,617,122.7C685.7,139,754,213,823,240C891.4,267,960,245,1029,224C1097.1,203,1166,181,1234,160C1302.9,139,1371,117,1406,106.7L1440,96L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path></svg>
-        </footer>
-
-
-        <!-- JAVASCRIPT FILES -->
-        <script src="/static/js/jquery.min.js"></script>
-        <script src="/static/js/bootstrap.bundle.min.js"></script>
-        <script src="/static/js/jquery.sticky.js"></script>
-        <script src="/static/js/click-scroll.js"></script>
-        <script src="/static/js/animated-headline.js"></script>
-        <script src="/static/js/modernizr.js"></script>
-        <script src="/static/js/custom.js"></script>
-
-    </body>
-</html>
+<!-- MEMBERSHIP -->
+<section class="membership-section section-padding" id="section_3">
+    <div class="container">
+
+        <h2 class="text-center mb-4">Membership</h2>
+
+        <form action="/membership" method="post">
+
+            {% if membership_success %}
+            <div class="alert alert-success">{{ membership_success }}</div>
+            {% endif %}
+
+            {% if membership_error %}
+            <div class="alert alert-danger">{{ membership_error }}</div>
+            {% endif %}
+
+            <input type="text" name="full_name" class="form-control mb-2" placeholder="Full Name" required>
+            <input type="email" name="email" class="form-control mb-2" placeholder="Email" required>
+            <input type="password" name="password" class="form-control mb-2" placeholder="Password" required>
+
+            <button class="btn custom-btn">Join</button>
+        </form>
+
+    </div>
+</section>
+
+
+<!-- EVENTS -->
+<section class="events-section section-padding" id="section_4">
+    <div class="container">
+
+        <h2>Upcoming Events</h2>
+
+        {% for event in events %}
+        <div class="mb-3">
+            <h4>{{ event.title }}</h4>
+            <p>{{ event.description }}</p>
+            <a href="/events/{{ event.id }}" class="btn custom-btn">View</a>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+
+<!-- CONTACT -->
+<section class="contact-section section-padding" id="section_5">
+    <div class="container">
+
+        <h2>Contact</h2>
+
+        <form action="/contact" method="post">
+            <input type="text" name="full_name" class="form-control mb-2" placeholder="Name">
+            <input type="email" name="email" class="form-control mb-2" placeholder="Email">
+            <textarea name="message" class="form-control mb-2"></textarea>
+
+            <button class="btn custom-btn">Send</button>
+        </form>
+
+    </div>
+</section>
+
+{% endblock %}
