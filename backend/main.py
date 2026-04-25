@@ -10,6 +10,8 @@ from backend.database import engine, get_db, SessionLocal
 from backend.models import  Base, Newsletter, ContactMessage, User, Event
 from backend.data import page_data
 from dotenv import load_dotenv
+from backend.api import events_api
+
 import os
 
 
@@ -37,6 +39,8 @@ app.mount(
 app.include_router(users.router)
 app.include_router(events.router)
 app.include_router(membership.router)
+app.include_router(events_api.router)
+
 
 
 
@@ -141,3 +145,7 @@ def contact_form(
             "contact_success": "Message sent successfully!"
         }
     )
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}    
